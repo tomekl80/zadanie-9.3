@@ -19,7 +19,7 @@ var buttonNewGame = document.getElementById('newGame');
 var btnPlayerMove = document.querySelectorAll('player-move');
 
 for (var i = 0; i < btnPlayerMove.length; i++) {
-  btnPlayerMove[i].addEventListener('click', playerMove() {
+  btnPlayerMove[i].addEventListener('click', playerMove); {
     document.playerMove.getAttribute('data-move');
   };
 }
