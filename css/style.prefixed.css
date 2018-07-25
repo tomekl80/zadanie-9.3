@@ -6,6 +6,6 @@ button { width: 200px; height: 50px; background-color: green; border: none; bord
 
 button:hover { background-color: white; color: green; border: green solid; }
 
-.newGame { display: flex; padding-bottom: 15px; }
+.newGame { display: -ms-flexbox; display: flex; padding-bottom: 15px; }
 
-#newGame { flex: 1; max-width: 150px; }
+#newGame { -ms-flex: 1; flex: 1; max-width: 150px; }

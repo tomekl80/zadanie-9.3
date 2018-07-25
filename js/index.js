@@ -15,18 +15,14 @@ var buttonRock = document.getElementById('rock');
 var buttonScissor = document.getElementById('scissors');
 var buttonNewGame = document.getElementById('newGame');
 
-// Przypisanie funkcji dla przycisków
-buttonRock.addEventListener('click', function () {
-  playerMove('rock');
-});
+// Pętla i przypisana funkcja dla wszystkich guzików jednocześnie
+var btnPlayerMove = document.querySelectorAll('player-move');
 
-buttonPaper.addEventListener('click', function() {
-  playerMove('paper');
-});
-
-buttonScissor.addEventListener('click', function() {
-  playerMove('scissors');
-})
+for (var i = 0; i < btnPlayerMove.length; i++) {
+  btnPlayerMove[i].addEventListener('click', playerMove() {
+    document.playerMove.getAttribute('data-move');
+  };
+}
 
 buttonNewGame.addEventListener('click', function() {
   // var outputNewGame = document.getElementById('outputNewGame');
