@@ -16,12 +16,15 @@ var buttonScissor = document.getElementById('scissors');
 var buttonNewGame = document.getElementById('newGame');
 
 // Pętla i przypisana funkcja dla wszystkich guzików jednocześnie
-var btnPlayerMove = document.querySelectorAll('player-move');
+var btnPlayerMove = document.querySelectorAll('player-move'); // Ustalam zmienną dla wszystkich elementów, które mają klasę "player-move"
 
 for (var i = 0; i < btnPlayerMove.length; i++) {
-  btnPlayerMove[i].addEventListener('click', playerMove() {
-    document.playerMove.getAttribute('data-move');
-  };
+  var dataMove = btnPlayerMove[i].getAttribute('.data-move'); // Tworzę pętlę, która wyciąga z przeszukanych elementów atrybut "data-move"
+  
+  btnPlayerMove[i].addEventListener('click', function() { // Wywołuję proces nasłuchiwania i wykonuję funkcję z argumentem "dataMove"
+    
+    playerMove(dataMove);
+  });
 }
 
 buttonNewGame.addEventListener('click', function() {
