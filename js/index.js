@@ -117,3 +117,64 @@ var playerMove = function(playerMove) {
 // Modals
 
 
+
+
+
+
+
+// Funkcja otwierająca modal
+
+var showModal = function(event){
+  event.preventDefault();
+  
+  if (event.target.getAttribute('href') == '#modal-one') {
+      document.getElementById('modal-one').classList.add('show');
+  } else if (event.target.getAttribute('href') == '#modal-two') {
+      document.getElementById('modal-two').classList.add('show');
+  } else if (event.target.getAttribute('href') == '#modal-three') {
+      document.getElementById('modal-three').classList.add('show');
+  }
+  
+  document.querySelector('#modal-overlay').classList.add('show');
+};
+  
+  // Mimo, że obecnie mamy tylko jeden link, stosujemy kod dla wielu linków. W ten sposób nie będzie trzeba go zmieniać, kiedy zechcemy mieć więcej linków lub guzików otwierających modale
+  
+  var modalLinks = document.querySelectorAll('.show-modal');
+  
+  for(var i = 0; i < modalLinks.length; i++){
+    modalLinks[i].addEventListener('click', showModal);
+  }
+  
+  // Dodajemy też funkcję zamykającą modal, oraz przywiązujemy ją do kliknięć na elemencie z klasą "close". 
+
+  var hideModal = function(event){
+      var activeModal = document.querySelectorAll('.modal')
+
+      event.preventDefault();
+      document.querySelector('#modal-overlay').classList.remove('show');
+    
+      for (var i = 0; i < activeModal.length; i++) {
+        activeModal[i].classList.remove('show');
+      }
+  };
+  
+  var closeButtons = document.querySelectorAll('.modal .close');
+  
+  for(var i = 0; i < closeButtons.length; i++){
+    closeButtons[i].addEventListener('click', hideModal);
+  }
+  
+  // Dobrą praktyką jest również umożliwianie zamykania modala poprzez kliknięcie w overlay. 
+  
+  document.querySelector('#modal-overlay').addEventListener('click', hideModal);
+  
+  // Musimy jednak pamiętać, aby zablokować propagację kliknięć z samego modala - inaczej każde kliknięcie wewnątrz modala również zamykałoby go. 
+  
+  var modals = document.querySelectorAll('.modal');
+  
+  for(var i = 0; i < modals.length; i++){
+    modals[i].addEventListener('click', function(event){
+      event.stopPropagation();
+    });
+  }
