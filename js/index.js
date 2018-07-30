@@ -1,19 +1,21 @@
 'use strict'
 
-// Podpinam główne zmienne
-var output = document.getElementById('output'); // Przypinam miejsce pokazywania wyniku
-var viewResults = document.getElementById('result'); // Przypinam miejsce do pokazywania ilości wygranych
-var outputNewGame = document.getElementById('outputNewGame');
-var playerWins = 0;
-var computerWins = 0;
-var maxRounds = 0;
-var completeRounds = 0;
-
 // Podpinam przyciski
 var buttonPaper = document.getElementById('paper');
 var buttonRock = document.getElementById('rock');
 var buttonScissor = document.getElementById('scissors');
 var buttonNewGame = document.getElementById('newGame');
+
+// Tworzenie zmiennej "params" dla zmiennych globalnych
+var params = {
+  output: document.getElementById('output'),
+  viewResults: document.getElementById('result'),
+  outputNewGame: document.getElementById('outputNewGame'),
+  playerWins: 0,
+  computerWins: 0,
+  maxRounds: 0,
+  completeRounds: 0
+};
 
 // Pętla i przypisana funkcja dla wszystkich guzików jednocześnie
 var btnPlayerMove = document.querySelectorAll('.player-move'); // Ustalam zmienną dla wszystkich elementów, które mają klasę "player-move"
@@ -29,24 +31,24 @@ for (var i = 0; i < btnPlayerMove.length; i++) {
 
 buttonNewGame.addEventListener('click', function() {
   // var outputNewGame = document.getElementById('outputNewGame');
-  output.innerHTML = '';
-  viewResults.innerHTML = '';
-  maxRounds = window.prompt('Podaj liczbę partii do rozegrania');
-  outputNewGame.innerHTML = 'Masz ' + maxRounds + ' rund do rozegrania. Powodzenia!';
-  completeRounds = 0;
-  playerWins = 0;
-  computerWins = 0;
+  params.output.innerHTML = '';
+  params.viewResults.innerHTML = '';
+  params.maxRounds = window.prompt('Podaj liczbę partii do rozegrania');
+  params.outputNewGame.innerHTML = 'Masz ' + params.maxRounds + ' rund do rozegrania. Powodzenia!';
+  params.completeRounds = 0;
+  params.playerWins = 0;
+  params.computerWins = 0;
   buttonPaper.removeAttribute('disabled');
   buttonRock.removeAttribute('disabled');
   buttonScissor.removeAttribute('disabled');
   
-  if (maxRounds === null || maxRounds === '') {
-    outputNewGame.innerHTML = 'Podaj liczbę!';
+  if (params.maxRounds === null || params.maxRounds === '') {
+    params.outputNewGame.innerHTML = 'Podaj liczbę!';
   }
-  else if (isNaN(maxRounds)) {
-    outputNewGame.innerHTML = 'To nie jest właściwa forma podania liczby!';
+  else if (isNaN(params.maxRounds)) {
+    params.outputNewGame.innerHTML = 'To nie jest właściwa forma podania liczby!';
   }
-  else if (maxRounds == completeRounds) {
+  else if (params.maxRounds == params.completeRounds) {
     buttonPaper.removeAttribute('disabled');
     buttonRock.removeAttribute('disabled');
     buttonScissor.removeAttribute('disabled');
@@ -62,36 +64,36 @@ var getComputerMove = function() {
 // Funkcja wyświetlająca wynik
 var displayResults = function(winnerIs, playerMove, computerMove) {
   if (winnerIs === 'none') {
-		output.innerHTML = 'Remis!<br>' + output.innerHTML;
+		params.output.innerHTML = 'Remis!<br>' + params.output.innerHTML;
 	} 
   
   else if (winnerIs === 'player') {
-		output.innerHTML = 'Wygrałeś! Zagrałeś ' + playerMove + ' a komputer zagrał ' + computerMove + '<br>' + output.innerHTML;
-		playerWins++;
-    completeRounds++;
+		params.output.innerHTML = 'Wygrałeś! Zagrałeś ' + playerMove + ' a komputer zagrał ' + computerMove + '<br>' + params.output.innerHTML;
+		params.playerWins++;
+    params.completeRounds++;
 	} 
   
   else {
-		output.innerHTML = 'Przegrałeś! Zagrałeś ' + playerMove + ' a komputer zagrał ' + computerMove + '<br>';
-		computerWins++;
-    completeRounds++;
+		params.output.innerHTML = 'Przegrałeś! Zagrałeś ' + playerMove + ' a komputer zagrał ' + computerMove + '<br>';
+		params.computerWins++;
+    params.completeRounds++;
 	}
   
-	viewResults.innerHTML = playerWins + ' : ' + computerWins + '<br>';
+	params.viewResults.innerHTML = params.playerWins + ' : ' + params.computerWins + '<br>';
   
 //   Wyświetlanie wyniku końcowego
-  if (maxRounds == completeRounds) {
-    viewResults.insertAdjacentHTML('beforeend', 'Gra została zakończona! Naciśnij przycisk "Nowa Gra", aby rozpocząć nową rozgrywkę.<br>');
+  if (params.maxRounds == params.completeRounds) {
+    params.viewResults.insertAdjacentHTML('beforeend', 'Gra została zakończona! Naciśnij przycisk "Nowa Gra", aby rozpocząć nową rozgrywkę.<br>');
     buttonPaper.setAttribute('disabled', true);
     buttonRock.setAttribute('disabled', true);
     buttonScissor.setAttribute('disabled', true);
-    outputNewGame.innerHTML = '';
+    params.outputNewGame.innerHTML = '';
   }
-  else if (playerWins === completeRounds) {
-    viewResults.insertAdjacentHTML('beforeend', 'Gratulacje! Wygrałeś tę rundę!<br>');
+  else if (params.playerWins === params.completeRounds) {
+    params.viewResults.insertAdjacentHTML('beforeend', 'Gratulacje! Wygrałeś tę rundę!<br>');
   }
-  else if (computerWins === completeRounds) {
-    viewResults.insertAdjacentHTML('beforeend', 'Przykro mi, ale przegrałeś<br>');
+  else if (params.computerWins === params.completeRounds) {
+    params.viewResults.insertAdjacentHTML('beforeend', 'Przykro mi, ale przegrałeś<br>');
   }
 
 };
@@ -111,3 +113,7 @@ var playerMove = function(playerMove) {
   // displayResults('Rundę wygrywa ' + winnerIs + '<br>');
   displayResults(winnerIs, playerMove, computerMove);
 }
+
+// Modals
+
+
