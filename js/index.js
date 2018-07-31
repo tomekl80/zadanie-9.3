@@ -44,11 +44,9 @@ buttonNewGame.addEventListener('click', function() {
   
   if (params.maxRounds === null || params.maxRounds === '') {
     params.outputNewGame.innerHTML = 'Podaj liczbę!';
-  }
-  else if (isNaN(params.maxRounds)) {
+  } else if (isNaN(params.maxRounds)) {
     params.outputNewGame.innerHTML = 'To nie jest właściwa forma podania liczby!';
-  }
-  else if (params.maxRounds == params.completeRounds) {
+  } else if (params.maxRounds == params.completeRounds) {
     buttonPaper.removeAttribute('disabled');
     buttonRock.removeAttribute('disabled');
     buttonScissor.removeAttribute('disabled');
@@ -65,15 +63,11 @@ var getComputerMove = function() {
 var displayResults = function(winnerIs, playerMove, computerMove) {
   if (winnerIs === 'none') {
 		params.output.innerHTML = 'Remis!<br>' + params.output.innerHTML;
-	} 
-  
-  else if (winnerIs === 'player') {
+	} else if (winnerIs === 'player') {
 		params.output.innerHTML = 'Wygrałeś! Zagrałeś ' + playerMove + ' a komputer zagrał ' + computerMove + '<br>' + params.output.innerHTML;
 		params.playerWins++;
     params.completeRounds++;
-	} 
-  
-  else {
+	} else {
 		params.output.innerHTML = 'Przegrałeś! Zagrałeś ' + playerMove + ' a komputer zagrał ' + computerMove + '<br>';
 		params.computerWins++;
     params.completeRounds++;
@@ -87,15 +81,13 @@ var displayResults = function(winnerIs, playerMove, computerMove) {
     buttonPaper.setAttribute('disabled', true);
     buttonRock.setAttribute('disabled', true);
     buttonScissor.setAttribute('disabled', true);
-    params.outputNewGame.innerHTML = '';
-  }
-  else if (params.playerWins === params.completeRounds) {
+    params.outputNewGame.insertAdjacentHTML = '';
+    showModal();
+  } else if (params.playerWins === params.completeRounds) {
     params.viewResults.insertAdjacentHTML('beforeend', 'Gratulacje! Wygrałeś tę rundę!<br>');
-  }
-  else if (params.computerWins === params.completeRounds) {
+  } else if (params.computerWins === params.completeRounds) {
     params.viewResults.insertAdjacentHTML('beforeend', 'Przykro mi, ale przegrałeś<br>');
   }
-
 };
 
 // Funkcja wyliczająca ruchy gracza
@@ -106,45 +98,29 @@ var playerMove = function(playerMove) {
       computerMove === 'rock' && playerMove === 'scissors' ||
       computerMove === 'paper' && playerMove === 'rock') {
     winnerIs = "computer";
-  }
-  else if (computerMove === playerMove) {
+  } else if (computerMove === playerMove) {
     winnerIs = 'none';
   }
-  // displayResults('Rundę wygrywa ' + winnerIs + '<br>');
   displayResults(winnerIs, playerMove, computerMove);
 }
 
-// Modals
-
-
-
-
-
-
+// Modals section
 
 // Funkcja otwierająca modal
 
-var showModal = function(event){
-  event.preventDefault();
-  
-  if (event.target.getAttribute('href') == '#modal-one') {
-      document.getElementById('modal-one').classList.add('show');
-  } else if (event.target.getAttribute('href') == '#modal-two') {
-      document.getElementById('modal-two').classList.add('show');
-  } else if (event.target.getAttribute('href') == '#modal-three') {
-      document.getElementById('modal-three').classList.add('show');
+var showModal = function(){
+
+  const divResults = document.querySelector('.content');
+  function results() {
+    return 'Gra została zakończona! Naciśnij przycisk "Nowa Gra", aby rozpocząć nową rozgrywkę.<br>';
   }
-  
+  divResults.innerHTML = results();
+
+  document.querySelector('#displayResults').classList.add('show');
+
   document.querySelector('#modal-overlay').classList.add('show');
 };
   
-  // Mimo, że obecnie mamy tylko jeden link, stosujemy kod dla wielu linków. W ten sposób nie będzie trzeba go zmieniać, kiedy zechcemy mieć więcej linków lub guzików otwierających modale
-  
-  var modalLinks = document.querySelectorAll('.show-modal');
-  
-  for(var i = 0; i < modalLinks.length; i++){
-    modalLinks[i].addEventListener('click', showModal);
-  }
   
   // Dodajemy też funkcję zamykającą modal, oraz przywiązujemy ją do kliknięć na elemencie z klasą "close". 
 
