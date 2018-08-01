@@ -82,7 +82,15 @@ var displayResults = function(winnerIs, playerMove, computerMove) {
     buttonRock.setAttribute('disabled', true);
     buttonScissor.setAttribute('disabled', true);
     params.outputNewGame.insertAdjacentHTML = '';
+
+    // Display results in modal
     showModal();
+    const divResults = document.querySelector('.content').children;
+    function results() {
+      return 'Gra została zakończona! Naciśnij przycisk "Nowa Gra", aby rozpocząć nową rozgrywkę.<br>';
+  };
+    divResults[0].innerHTML = results();
+    // End - Display results in modal
   } else if (params.playerWins === params.completeRounds) {
     params.viewResults.insertAdjacentHTML('beforeend', 'Gratulacje! Wygrałeś tę rundę!<br>');
   } else if (params.computerWins === params.completeRounds) {
@@ -109,12 +117,6 @@ var playerMove = function(playerMove) {
 // Funkcja otwierająca modal
 
 var showModal = function(){
-
-  const divResults = document.querySelector('.content');
-  function results() {
-    return 'Gra została zakończona! Naciśnij przycisk "Nowa Gra", aby rozpocząć nową rozgrywkę.<br>';
-  }
-  divResults.innerHTML = results();
 
   document.querySelector('#displayResults').classList.add('show');
 
