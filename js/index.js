@@ -14,7 +14,8 @@ var params = {
   playerWins: 0,
   computerWins: 0,
   maxRounds: 0,
-  completeRounds: 0
+  completeRounds: 0,
+  progress = [];
 };
 
 // Pętla i przypisana funkcja dla wszystkich guzików jednocześnie
@@ -110,6 +111,28 @@ var playerMove = function(playerMove) {
     winnerIs = 'none';
   }
   displayResults(winnerIs, playerMove, computerMove);
+  // Stage 5 - Table of results
+  params.progress.push(
+  {
+    winnerIs: 'computer',
+    computerMove: 'scissors',
+    playerMove: 'paper'
+  },
+  {
+    winnerIs: 'computer',
+    computerMove: 'rock',
+    playerMove: 'scissors'
+  },
+  {
+    winnerIs: 'computer',
+    computerMove: 'paper',
+    playerMove: 'rock'
+  },
+  );
+
+  for (var i = 0; i < params.progress.length; i++) {
+    params.progress[i].querySelector('content').innerHTML += '<br><table>' + '<tr>' + '<td>' + params.progress[i].winnerIs + '</td>' + '<td>' + params.progress[i].computerMove + '</td>' + '<td>' + params.progress[i].playerMove + '</td>' + '</tr>' + '</table>' + '<br>';
+  };
 }
 
 // Modals section
