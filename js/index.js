@@ -15,7 +15,7 @@ var params = {
   computerWins: 0,
   maxRounds: 0,
   completeRounds: 0,
-  progress = [];
+  progress: [],
 };
 
 // Pętla i przypisana funkcja dla wszystkich guzików jednocześnie
@@ -42,7 +42,8 @@ buttonNewGame.addEventListener('click', function() {
   buttonPaper.removeAttribute('disabled');
   buttonRock.removeAttribute('disabled');
   buttonScissor.removeAttribute('disabled');
-  
+  document.querySelector('.content-results').innerHTML = '';
+
   if (params.maxRounds === null || params.maxRounds === '') {
     params.outputNewGame.innerHTML = 'Podaj liczbę!';
   } else if (isNaN(params.maxRounds)) {
@@ -52,7 +53,7 @@ buttonNewGame.addEventListener('click', function() {
     buttonRock.removeAttribute('disabled');
     buttonScissor.removeAttribute('disabled');
   }
-})
+});
 
 // Funkcja losowania liczby przez komputer między 1 a 3
 var getComputerMove = function() {
@@ -90,7 +91,7 @@ var displayResults = function(winnerIs, playerMove, computerMove) {
     function results() {
       return 'Gra została zakończona! Naciśnij przycisk "Nowa Gra", aby rozpocząć nową rozgrywkę.<br>';
   };
-    divResults[0].innerHTML = results();
+    divResults[0].insertAdjacentHTML('afterbegin', results());
     // End - Display results in modal
   } else if (params.playerWins === params.completeRounds) {
     params.viewResults.insertAdjacentHTML('beforeend', 'Gratulacje! Wygrałeś tę rundę!<br>');
@@ -113,36 +114,26 @@ var playerMove = function(playerMove) {
   displayResults(winnerIs, playerMove, computerMove);
   // Stage 5 - Table of results
   params.progress.push(
-  {
-    winnerIs: 'computer',
-    computerMove: 'scissors',
-    playerMove: 'paper'
-  },
-  {
-    winnerIs: 'computer',
-    computerMove: 'rock',
-    playerMove: 'scissors'
-  },
-  {
-    winnerIs: 'computer',
-    computerMove: 'paper',
-    playerMove: 'rock'
-  },
+    {
+      winnerIs: winnerIs,
+      computerMove: computerMove,
+      playerMove: playerMove,
+    },
   );
-
-  for (var i = 0; i < params.progress.length; i++) {
-    params.progress[i].querySelector('content').innerHTML += '<br><table>' + '<tr>' + '<td>' + params.progress[i].winnerIs + '</td>' + '<td>' + params.progress[i].computerMove + '</td>' + '<td>' + params.progress[i].playerMove + '</td>' + '</tr>' + '</table>' + '<br>';
-  };
 }
 
 // Modals section
 
 // Funkcja otwierająca modal
 
-var showModal = function(){
+var showModal = function() {
+  var resultsEl = document.querySelector('.content-results');
+
+  for (var i = 0; i < params.progress.length; i++) {
+    resultsEl.innerHTML += '<tr><td>' + params.progress[i].winnerIs + '</td><td>' + params.progress[i].playerMove + '</td><td>' + params.progress[i].computerMove + '</td></tr>';
+  }
 
   document.querySelector('#displayResults').classList.add('show');
-
   document.querySelector('#modal-overlay').classList.add('show');
 };
   
