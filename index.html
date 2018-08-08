@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <meta charset="UTF-8">
-    <title>Zadanie-8.4</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie-9.3</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <head>
-      <meta charset="utf-8">
-      <title>Website</title>
-      <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
-      <div id="outputNewGame"></div>
-    </div>
+    <div id="outputNewGame"></div>
     <div>
       <div class="newGame">
         <button id="newGame">Nowa gra</button>
@@ -25,24 +19,31 @@
     <br>
     <br>
     <div id="output">
-      
     </div>
     <div id="result">
-      
     </div>
-    
     <!-- Modals -->
     <div class="overlay" id="modal-overlay">
       <div class="modal" id="displayResults">
         <a href="#" class="close">x</a>
-        <header>Wynik gry</header>
-        <div class="content">
-          <p>Dolor sit amet!</p>
-        </div>
+      <header>Wynik gry</header>
+      <div class="content">
+        <p></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Wygrana</th>
+              <th>Ruch gracza</th>
+              <th>Ruch komputera</th>
+            </tr>
+          </thead>
+          <tbody class="content-results">
+          </tbody>
+        </table>
       </div>
     </div>
-<!-- End of Modals -->
-  </body>
+  </div>
+  <!-- End of Modals -->
   <script  src="js/index.js"></script>
 </body>
 </html>

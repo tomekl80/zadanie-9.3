@@ -83,3 +83,15 @@ button:hover {
 		padding: 5px 30px;
 	}
 }
+table, td, th {
+	border: 1px solid black;
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+td {
+	height: 50px;
+	vertical-align: middle;
+	text-align: center;
+}
